@@ -1,29 +1,31 @@
 import { orgAlreadyExistsError } from 'src/use-cases/errors/orgAlreadyExists'
-import { inMemoryOrgsRepos } from 'src/repositories/in-Memory/inMemory-orgs-repository'
-import { registerOrgUseCase } from 'src/use-cases/register-org'
+import { InMemoryOrgsRepos } from 'src/repositories/in-Memory/inMemory-orgs-repository'
+import { RegisterOrgUseCase } from 'src/use-cases/register-org'
 import { expect, describe, it } from 'vitest'
 import { compare, hash } from 'bcryptjs'
+import { beforeEach } from 'vitest'
 
+let orgRepository: InMemoryOrgsRepos
+let sut: RegisterOrgUseCase
 describe('Org use case', () => {
-  it('should can register an organization', async () => {
-    const orgRepository = new inMemoryOrgsRepos()
-    const sut = new registerOrgUseCase(orgRepository)
+  beforeEach(async () => {
+    orgRepository = new InMemoryOrgsRepos()
+    sut = new RegisterOrgUseCase(orgRepository)
+  })
 
+  it('should can register an organization', async () => {
     const { org } = await sut.registerOrg({
       responsableName: 'John Doe',
       email: 'johndoe@example.com',
       cep: '12345-678',
       address: 'Rua Teste, 123',
       phoneNumber: '11 99999999',
-      password_hash: 'password_hash',
+      password: 'password_hash',
     })
 
     expect(org.id).toEqual(expect.any(String))
   })
   it('should not register an organization with duplicate email', async () => {
-    const orgRepository = new inMemoryOrgsRepos()
-    const sut = new registerOrgUseCase(orgRepository)
-
     const email = 'johndoe@example.com'
 
     await sut.registerOrg({
@@ -32,7 +34,7 @@ describe('Org use case', () => {
       cep: '12345-678',
       address: 'Rua Teste, 123',
       phoneNumber: '11 99999999',
-      password_hash: 'password_hash',
+      password: 'password_hash',
     })
 
     await expect(() =>
@@ -42,21 +44,18 @@ describe('Org use case', () => {
         cep: '12345-678',
         address: 'Rua Teste, 123',
         phoneNumber: '11 99999999',
-        password_hash: 'passasdassh',
+        password: 'passasdassh',
       })
     ).rejects.toBeInstanceOf(orgAlreadyExistsError)
   })
   it('should can hash the password', async () => {
-    const orgRepository = new inMemoryOrgsRepos()
-    const sut = new registerOrgUseCase(orgRepository)
-
     const { org } = await sut.registerOrg({
       responsableName: 'John Doe',
       email: 'johndoe@example.com',
       cep: '12345-678',
       address: 'Rua Teste, 123',
       phoneNumber: '11 99999999',
-      password_hash: 'this password must be hashed',
+      password: 'this password must be hashed',
     })
 
     const isPasswordCorrectlyHashed = await compare(
