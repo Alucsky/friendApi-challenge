@@ -1,0 +1,86 @@
+// Prisma schema for your database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Age {
+  PUPPY
+  YOUNG
+  ADULT
+  SENIOR
+}
+
+enum AnimalSize {
+  SMALL
+  MEDIUM
+  LARGE
+  XLARGE
+}
+
+enum EnergyLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum IndependenceLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Environment {
+  INDOOR
+  OUTDOOR
+  BOTH
+}
+
+model City {
+  id   String @id @default(uuid())
+  name String @unique
+  Pet  Pet[]
+
+  @@map("cities")
+}
+
+model Pet {
+  id                String            @id @default(uuid())
+  name              String
+  about             String
+  age               Age
+  animalSize        AnimalSize
+  energyLevel       EnergyLevel
+  independenceLevel IndependenceLevel
+  environment       Environment
+  pictures          String[]
+  required          String[]
+
+  adopted Boolean @default(false)
+
+  city    City   @relation(fields: [city_id], references: [id])
+  city_id String
+
+  org    Org    @relation(fields: [org_id], references: [id])
+  org_id String
+
+  @@map("pets")
+}
+
+model Org {
+  id              String @id @default(uuid())
+  responsableName String
+  email           String @unique
+  cep             String
+  address         String
+  phoneNumber     String
+  password_hash   String
+  Pet             Pet[]
+
+  @@map("orgs")
+}
