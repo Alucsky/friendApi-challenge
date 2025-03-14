@@ -9,14 +9,14 @@ interface RegisterOrgUseCaseRequest {
   cep: string
   address: string
   phoneNumber: string
-  password_hash: string
+  password: string
 }
 
 interface RegisterOrgUseCaseResponse {
   org: Org
 }
 
-export class registerOrgUseCase {
+export class RegisterOrgUseCase {
   constructor(private orgsRepository: OrgsRepository) {}
 
   async registerOrg({
@@ -25,9 +25,9 @@ export class registerOrgUseCase {
     cep,
     address,
     phoneNumber,
-    password_hash,
+    password,
   }: RegisterOrgUseCaseRequest): Promise<RegisterOrgUseCaseResponse> {
-    const password_hashed = await hash(password_hash, 6)
+    const password_hashed = await hash(password, 6)
 
     const orgWithSameEmail = await this.orgsRepository.findByEmail(email)
 

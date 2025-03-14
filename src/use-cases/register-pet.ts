@@ -30,14 +30,14 @@ interface RegisterPetUseCaseResponse {
   pet: Pet
 }
 
-export class registerPetUseCase {
+export class RegisterPetUseCase {
   constructor(
     private petsRepository: PetsRepository,
     private orgsRepository: OrgsRepository,
     private citiesRepository: citiesRepository
   ) {}
 
-  async registerOrg({
+  async registerPet({
     name,
     about,
     age,

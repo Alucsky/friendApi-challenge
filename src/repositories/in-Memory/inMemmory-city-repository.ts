@@ -1,7 +1,7 @@
 import { City } from 'src/entities/city'
 import { citiesRepository } from '../cities-repository'
 
-export class inMemoryCityRepos implements citiesRepository {
+export class InMemoryCityRepos implements citiesRepository {
   public cities: City[] = []
   async create(city: City) {
     this.cities.push(city)

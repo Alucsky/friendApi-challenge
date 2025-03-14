@@ -1,7 +1,7 @@
 import { Org } from '@/entities/org'
 import { OrgsRepository } from '../orgs-repository'
 
-export class inMemoryOrgsRepos implements OrgsRepository {
+export class InMemoryOrgsRepos implements OrgsRepository {
   public orgs: Org[] = []
   async findByEmail(email: string): Promise<Org | null> {
     const org = this.orgs.find((org) => {

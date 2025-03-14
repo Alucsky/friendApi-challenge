@@ -10,10 +10,10 @@ interface RegisterCityUseCaseResponse {
   city: City
 }
 
-export class registerCityUseCase {
+export class RegisterCityUseCase {
   constructor(private citiesRepository: citiesRepository) {}
 
-  async registerOrg({
+  async registerCity({
     name,
   }: RegisterCityUseCaseRequest): Promise<RegisterCityUseCaseResponse> {
     const cityWithSameName = await this.citiesRepository.findByName(name)
