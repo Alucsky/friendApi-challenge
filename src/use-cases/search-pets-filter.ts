@@ -10,11 +10,11 @@ import { PetsRepository } from 'src/repositories/pets-repository'
 
 interface SearchPetsRequestProps {
   city_id: string
-  age: Age
-  animalSize: AnimalSize
-  energyLevel: EnergyLevel
-  independenceLevel: IndependenceLevel
-  environment: Environment
+  age: Age | undefined
+  animalSize: AnimalSize | undefined
+  energyLevel: EnergyLevel | undefined
+  independenceLevel: IndependenceLevel | undefined
+  environment: Environment | undefined
 }
 
 interface SearchPetsResponseProps {
