@@ -10,7 +10,7 @@ interface SearchPetsResponseProps {
   pet: Pet
 }
 
-export class SearchPetsOrgUseCase {
+export class SearchPetUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({

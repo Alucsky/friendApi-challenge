@@ -21,7 +21,7 @@ interface SearchPetsResponseProps {
   pets: Pet[] | null
 }
 
-export class SearchPetsOrgUseCase {
+export class SearchPetsFilterUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({
