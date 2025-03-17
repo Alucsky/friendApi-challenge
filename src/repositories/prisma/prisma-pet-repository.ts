@@ -1,15 +1,8 @@
-import {
-  Pet,
-  Age,
-  AnimalSize,
-  EnergyLevel,
-  Environment,
-  IndependenceLevel,
-} from 'src/entities/pet'
+import { Pet } from 'src/entities/pet'
 import { PetsRepository } from '../pets-repository'
 import { prisma } from 'src/lib/prisma'
 import { PrismaPetMapper } from './mappers/prisma-pet-mapper'
-import { invalidCityError } from 'src/use-cases/errors/invalidCity'
+import { IFindPetsByCharacteristicsDTO } from 'src/dtos/IFindPetsByCharacteristicsDTO'
 
 export class PrismaPetRepository implements PetsRepository {
   async create(pet: Pet) {
@@ -36,18 +29,14 @@ export class PrismaPetRepository implements PetsRepository {
     return PrismaPetMapper.toDomain(prismaPet)
   }
 
-  async findByCharacteristics(
-    city_id: string,
-    age: Age,
-    animalSize: AnimalSize,
-    energyLevel: EnergyLevel,
-    independenceLevel: IndependenceLevel,
-    environment: Environment
-  ) {
-    if (!city_id) {
-      throw new invalidCityError()
-    }
-
+  async findByCharacteristics({
+    city_id,
+    age,
+    animalSize,
+    energyLevel,
+    independenceLevel,
+    environment,
+  }: IFindPetsByCharacteristicsDTO) {
     const raw = await prisma.pet.findMany({
       where: {
         city_id,
@@ -58,10 +47,6 @@ export class PrismaPetRepository implements PetsRepository {
         environment,
       },
     })
-
-    if (!raw || raw.length === 0) {
-      return null
-    }
 
     return raw.map(PrismaPetMapper.toDomain)
   }

@@ -32,14 +32,14 @@ export class SearchPetsFilterUseCase {
     independenceLevel,
     environment,
   }: SearchPetsRequestProps): Promise<SearchPetsResponseProps> {
-    const pets = await this.petsRepository.findByCharacteristics(
+    const pets = await this.petsRepository.findByCharacteristics({
       city_id,
       age,
       animalSize,
       energyLevel,
       independenceLevel,
-      environment
-    )
+      environment,
+    })
 
     return {
       pets,

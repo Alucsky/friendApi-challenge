@@ -49,24 +49,4 @@ export class PrismaPetMapper {
       prismaPet.id
     )
   }
-
-  static toPrismaCharacteristics(pet: Pet): Prisma.PetWhereInput {
-    return {
-      age: pet.age,
-      animalSize: pet.animalSize,
-      energyLevel: pet.energyLevel,
-      independenceLevel: pet.independenceLevel,
-      environment: pet.environment,
-    }
-  }
-
-  static toDomainCharacteristics(prismaPet: PrismaPet): Partial<Pet> {
-    return {
-      age: prismaPet.age as Age,
-      animalSize: prismaPet.animalSize as AnimalSize,
-      energyLevel: prismaPet.energyLevel as EnergyLevel,
-      independenceLevel: prismaPet.independenceLevel as IndependenceLevel,
-      environment: prismaPet.environment as Environment,
-    }
-  }
 }

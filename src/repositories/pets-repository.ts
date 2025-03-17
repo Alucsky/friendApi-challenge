@@ -1,28 +1,11 @@
-import {
-  Age,
-  AnimalSize,
-  EnergyLevel,
-  Environment,
-  IndependenceLevel,
-  Pet,
-} from 'src/entities/pet'
+import { IFindPetsByCharacteristicsDTO } from '@/dtos/IFindPetsByCharacteristicsDTO'
+import { Pet } from 'src/entities/pet'
 
 export abstract class PetsRepository {
   abstract create(pet: Pet): Promise<Pet | void>
   abstract findById(id: string): Promise<Pet | null>
 
   abstract findByCharacteristics(
-    city_id: string,
-    age: Age | undefined,
-    animalSize: AnimalSize | undefined,
-    energyLevel: EnergyLevel | undefined,
-    independenceLevel: IndependenceLevel | undefined,
-    environment: Environment | undefined
-  ): Promise<Pet[] | null>
+    data: IFindPetsByCharacteristicsDTO
+  ): Promise<Pet[]>
 }
-
-// age: Age
-// animalSize: AnimalSize
-// energyLevel: EnergyLevel
-// independenceLevel: IndependenceLevel
-// environment: Environment
