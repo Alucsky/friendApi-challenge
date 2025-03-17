@@ -4,8 +4,14 @@ import { PrismaCityRepository } from 'src/repositories/prisma/prisma-city-reposi
 import { PrismaPetRepository } from 'src/repositories/prisma/prisma-pet-repository'
 
 export function MakeRegisterPetUseCase() {
+  const orgRepository = new PrismaOrgsRepository()
+  const cityRepository = new PrismaCityRepository()
   const petsRepository = new PrismaPetRepository()
-  const useCase = new RegisterPetUseCase(petsRepository)
+  const useCase = new RegisterPetUseCase(
+    petsRepository,
+    orgRepository,
+    cityRepository
+  )
 
   return useCase
 }
