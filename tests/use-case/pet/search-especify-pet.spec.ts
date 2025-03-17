@@ -12,19 +12,19 @@ import {
   IndependenceLevel,
   Pet,
 } from 'src/entities/pet'
-import { SearchPetsOrgUseCase } from 'src/use-cases/search-pets-filter'
+import { SearchPetsFilterUseCase } from 'src/use-cases/search-pets-filter'
 
 let orgRepository: InMemoryOrgsRepos
 let cityRepository: InMemoryCityRepos
 let petsRepository: InMemoryPetsRepos
-let sut: SearchPetsOrgUseCase
+let sut: SearchPetsFilterUseCase
 
 describe('City use case', () => {
   beforeEach(async () => {
     orgRepository = new InMemoryOrgsRepos()
     cityRepository = new InMemoryCityRepos()
     petsRepository = new InMemoryPetsRepos()
-    sut = new SearchPetsOrgUseCase(petsRepository)
+    sut = new SearchPetsFilterUseCase(petsRepository)
 
     const newCity = new City(
       {
