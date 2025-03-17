@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { MakeSearchEspecifyPetUseCase } from '@/use-cases/factories/searchEspecifyPetUseCase'
+import { MakeSearchEspecifyPetUseCase } from '@/use-cases/factories/makeSearchEspecifyPetUseCase'
 
 export async function SearchEspecifyPet(
   request: FastifyRequest,

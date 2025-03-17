@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { MakeSearchEspecifyPetUseCase } from '@/use-cases/factories/searchEspecifyPetUseCase'
 import {
   Age,
   AnimalSize,
@@ -8,7 +7,7 @@ import {
   Environment,
   IndependenceLevel,
 } from 'src/entities/pet'
-import { MakeSearchPetsFilterUseCase } from '@/use-cases/factories/searchPetsFilterUseCase'
+import { MakeSearchPetsFilterUseCase } from 'src/use-cases/factories/makeSearchPetsFilterUseCase'
 
 export async function SearchPetsFilter(
   request: FastifyRequest,

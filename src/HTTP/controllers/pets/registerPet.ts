@@ -7,7 +7,7 @@ import {
 } from 'src/entities/pet'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { MakeRegisterPetUseCase } from '@/use-cases/factories/registerPetUseCase'
+import { MakeRegisterPetUseCase } from '@/use-cases/factories/makeRegisterPetUseCase'
 
 // const newPet = {
 //   name: 'Rex',
@@ -95,5 +95,5 @@ export async function RegisterPet(
     org_id,
   })
 
- return reply.status(201).send({ message: 'Pete registered successfully' })
+  return reply.status(201).send({ message: 'Pete registered successfully' })
 }
