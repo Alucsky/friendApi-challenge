@@ -7,8 +7,6 @@ import {
   Pet,
 } from 'src/entities/pet'
 import { PetsRepository } from 'src/repositories/pets-repository'
-import { ResourceNotFoundError } from 'src/use-cases/errors/resourceNotFound'
-import { invalidCityError } from './errors/invalidCity'
 
 interface SearchPetsRequestProps {
   city_id: string

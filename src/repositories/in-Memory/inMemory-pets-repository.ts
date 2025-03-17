@@ -13,6 +13,8 @@ export class InMemoryPetsRepos implements PetsRepository {
   public pets: Pet[] = []
   async create(pet: Pet) {
     this.pets.push(pet)
+
+    return pet
   }
   async findById(id: string) {
     const pet = this.pets.find((pet) => {
