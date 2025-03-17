@@ -1,13 +1,26 @@
-import { Pet } from 'src/entities/pet'
-import { PetsRepository } from '@/repositories/pets-repository'
+import {
+  Age,
+  AnimalSize,
+  EnergyLevel,
+  Environment,
+  IndependenceLevel,
+  Pet,
+} from 'src/entities/pet'
+import { PetsRepository } from 'src/repositories/pets-repository'
 import { ResourceNotFoundError } from 'src/use-cases/errors/resourceNotFound'
+import { invalidCityError } from './errors/invalidCity'
 
 interface SearchPetsRequestProps {
   city_id: string
+  age: Age
+  animalSize: AnimalSize
+  energyLevel: EnergyLevel
+  independenceLevel: IndependenceLevel
+  environment: Environment
 }
 
 interface SearchPetsResponseProps {
-  pets: Pet[]
+  pets: Pet[] | null
 }
 
 export class SearchPetsOrgUseCase {
@@ -15,12 +28,20 @@ export class SearchPetsOrgUseCase {
 
   async execute({
     city_id,
+    age,
+    animalSize,
+    energyLevel,
+    independenceLevel,
+    environment,
   }: SearchPetsRequestProps): Promise<SearchPetsResponseProps> {
-    const pets = await this.petsRepository.findByCity(city_id)
-
-    if (!pets) {
-      throw new ResourceNotFoundError()
-    }
+    const pets = await this.petsRepository.findByCharacteristics(
+      city_id,
+      age,
+      animalSize,
+      energyLevel,
+      independenceLevel,
+      environment
+    )
 
     return {
       pets,

@@ -1,5 +1,13 @@
-import { Pet } from '@/entities/pet'
+import {
+  Age,
+  AnimalSize,
+  EnergyLevel,
+  Environment,
+  IndependenceLevel,
+  Pet,
+} from 'src/entities/pet'
 import { PetsRepository } from '../pets-repository'
+import { invalidCityError } from 'src/use-cases/errors/invalidCity'
 
 export class InMemoryPetsRepos implements PetsRepository {
   public pets: Pet[] = []
@@ -18,8 +26,36 @@ export class InMemoryPetsRepos implements PetsRepository {
     return pet
   }
 
-  async findByCity(city_id: string) {
-    const petsInCity = this.pets.filter((pet) => pet.city_id === city_id)
-    return petsInCity
+  async findByCharacteristics(
+    city_id: string,
+    age: Age | undefined,
+    animalSize: AnimalSize | undefined,
+    energyLevel: EnergyLevel | undefined,
+    independenceLevel: IndependenceLevel | undefined,
+    environment: Environment | undefined
+  ) {
+    if (!city_id) {
+      throw new invalidCityError()
+    }
+
+    const filters = {
+      city_id,
+      age,
+      animalSize,
+      energyLevel,
+      independenceLevel,
+      environment,
+    }
+
+    const petsPassedInFilter = this.pets.filter((pet) => {
+      return Object.entries(filters).every(([key, value]) => {
+        if (value !== undefined) {
+          return pet[key as keyof Pet] === value
+        }
+        return true
+      })
+    })
+
+    return petsPassedInFilter
   }
 }
