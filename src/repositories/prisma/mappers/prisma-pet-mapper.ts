@@ -5,7 +5,7 @@ import {
   EnergyLevel,
   Environment,
   IndependenceLevel,
-} from '@/entities/pet'
+} from 'src/entities/pet'
 import { $Enums, Prisma, Pet as PrismaPet } from '@prisma/client'
 
 export class PrismaPetMapper {
@@ -30,7 +30,6 @@ export class PrismaPetMapper {
       },
     }
   }
-
   static toDomain(prismaPet: PrismaPet): Pet {
     return new Pet(
       {
@@ -49,5 +48,25 @@ export class PrismaPetMapper {
       },
       prismaPet.id
     )
+  }
+
+  static toPrismaCharacteristics(pet: Pet): Prisma.PetWhereInput {
+    return {
+      age: pet.age,
+      animalSize: pet.animalSize,
+      energyLevel: pet.energyLevel,
+      independenceLevel: pet.independenceLevel,
+      environment: pet.environment,
+    }
+  }
+
+  static toDomainCharacteristics(prismaPet: PrismaPet): Partial<Pet> {
+    return {
+      age: prismaPet.age as Age,
+      animalSize: prismaPet.animalSize as AnimalSize,
+      energyLevel: prismaPet.energyLevel as EnergyLevel,
+      independenceLevel: prismaPet.independenceLevel as IndependenceLevel,
+      environment: prismaPet.environment as Environment,
+    }
   }
 }

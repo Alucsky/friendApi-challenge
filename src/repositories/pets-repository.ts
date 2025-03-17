@@ -8,7 +8,7 @@ import {
 } from 'src/entities/pet'
 
 export abstract class PetsRepository {
-  abstract create(data: Pet): Promise<void>
+  abstract create(pet: Pet): Promise<Pet>
   abstract findById(id: string): Promise<Pet | null>
 
   abstract findByCharacteristics(

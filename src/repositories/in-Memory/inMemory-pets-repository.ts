@@ -11,8 +11,8 @@ import { invalidCityError } from 'src/use-cases/errors/invalidCity'
 
 export class InMemoryPetsRepos implements PetsRepository {
   public pets: Pet[] = []
-  async create(data: Pet) {
-    this.pets.push(data)
+  async create(pet: Pet) {
+    this.pets.push(pet)
   }
   async findById(id: string) {
     const pet = this.pets.find((pet) => {
