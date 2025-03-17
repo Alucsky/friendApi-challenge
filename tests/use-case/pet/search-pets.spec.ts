@@ -1,7 +1,6 @@
 import { InMemoryOrgsRepos } from 'src/repositories/in-Memory/inMemory-orgs-repository'
 import { InMemoryCityRepos } from 'src/repositories/in-Memory/inMemmory-city-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { RegisterPetUseCase } from 'src/use-cases/register-pet'
 import { InMemoryPetsRepos } from 'src/repositories/in-Memory/inMemory-pets-repository'
 import { City } from 'src/entities/city'
 import { Org } from 'src/entities/org'
@@ -51,7 +50,7 @@ describe('City use case', () => {
     await orgRepository.create(newOrg)
   })
 
-  it('should can search multiple by city', async () => {
+  it('should can search multiple by characteristics', async () => {
     for (let i = 0; i < 10; i++) {
       const pet = new Pet(
         {
@@ -103,8 +102,12 @@ describe('City use case', () => {
 
     const { pets } = await sut.execute({
       city_id: 'id-city',
+      age: Age.SENIOR,
+      animalSize: AnimalSize.LARGE,
+      energyLevel: EnergyLevel.LOW,
+      independenceLevel: IndependenceLevel.LOW,
+      environment: Environment.INDOOR,
     })
-
-    expect(pets.length).toBe(10)
+    expect(pets).toHaveLength(10)
   })
 })
