@@ -1,4 +1,4 @@
-import { MakeRegisterCityUseCase } from '@/use-cases/factories/makeRegisterCityUseCase'
+import { MakeRegisterCityUseCase } from 'src/use-cases/factories/makeRegisterCityUseCase'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

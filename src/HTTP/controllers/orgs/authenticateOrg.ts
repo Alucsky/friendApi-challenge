@@ -21,5 +21,5 @@ export async function AuthenticateOrg(
     password,
   })
 
-  return reply.status(201).send({ message: 'Org registered successfully' })
+  return reply.status(201).send({ message: 'Org loged successfully' })
 }

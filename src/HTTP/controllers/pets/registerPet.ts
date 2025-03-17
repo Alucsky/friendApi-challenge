@@ -9,24 +9,6 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { MakeRegisterPetUseCase } from '@/use-cases/factories/makeRegisterPetUseCase'
 
-// const newPet = {
-//   name: 'Rex',
-//   about: 'Rex is a cute little puppy',
-//   age: Age.ADULT,
-//   animalSize: AnimalSize.SMALL,
-//   energyLevel: EnergyLevel.LOW,
-//   independenceLevel: IndependenceLevel.HIGH,
-//   environment: Environment.INDOOR,
-//   pictures: [
-//     'https://example.com/image1.jpg',
-//     'https://example.com/image2.jpg',
-//   ],
-//   required: ['toys', 'food'],
-//   adopted: false,
-//   city_id: 'id-city',
-//   org_id: 'id-org',
-// }
-
 export async function RegisterPet(
   request: FastifyRequest,
   reply: FastifyReply
@@ -95,5 +77,5 @@ export async function RegisterPet(
     org_id,
   })
 
-  return reply.status(201).send({ message: 'Pete registered successfully' })
+  return reply.status(201).send({ message: 'Pet registered successfully' })
 }

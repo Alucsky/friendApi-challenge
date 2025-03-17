@@ -16,7 +16,7 @@ describe('City use case', () => {
   it('should not register an city if it already exists', async () => {
     const cityRepository = new InMemoryCityRepos()
     const sut = new RegisterCityUseCase(cityRepository)
-    
+
     await sut.registerCity({
       name: 'Joinville',
     })

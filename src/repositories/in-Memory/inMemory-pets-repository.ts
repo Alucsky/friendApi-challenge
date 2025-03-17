@@ -8,6 +8,7 @@ import {
 } from 'src/entities/pet'
 import { PetsRepository } from '../pets-repository'
 import { invalidCityError } from 'src/use-cases/errors/invalidCity'
+import { IFindPetsByCharacteristicsDTO } from 'src/dtos/IFindPetsByCharacteristicsDTO'
 
 export class InMemoryPetsRepos implements PetsRepository {
   public pets: Pet[] = []
@@ -28,18 +29,14 @@ export class InMemoryPetsRepos implements PetsRepository {
     return pet
   }
 
-  async findByCharacteristics(
-    city_id: string,
-    age: Age | undefined,
-    animalSize: AnimalSize | undefined,
-    energyLevel: EnergyLevel | undefined,
-    independenceLevel: IndependenceLevel | undefined,
-    environment: Environment | undefined
-  ) {
-    if (!city_id) {
-      throw new invalidCityError()
-    }
-
+  async findByCharacteristics({
+    city_id,
+    age,
+    animalSize,
+    energyLevel,
+    independenceLevel,
+    environment,
+  }: IFindPetsByCharacteristicsDTO) {
     const filters = {
       city_id,
       age,

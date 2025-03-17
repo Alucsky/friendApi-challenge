@@ -14,33 +14,33 @@ export async function SearchPetsFilter(
   reply: FastifyReply
 ) {
   const searchPetFilterSchema = z.object({
-    city_id: z.string(),
-    age: z.enum([Age.PUPPY, Age.YOUNG, Age.ADULT, Age.SENIOR]),
-    animalSize: z.enum([
-      AnimalSize.SMALL,
-      AnimalSize.MEDIUM,
-      AnimalSize.LARGE,
-      AnimalSize.XLARGE,
-    ]),
-    energyLevel: z.enum([
-      EnergyLevel.LOW,
-      EnergyLevel.MEDIUM,
-      EnergyLevel.HIGH,
-    ]),
-    independenceLevel: z.enum([
-      IndependenceLevel.LOW,
-      IndependenceLevel.MEDIUM,
-      IndependenceLevel.HIGH,
-    ]),
-    environment: z.enum([
-      Environment.INDOOR,
-      Environment.OUTDOOR,
-      Environment.BOTH,
-    ]),
+    cityId: z.string(),
+    age: z.enum([Age.PUPPY, Age.YOUNG, Age.ADULT, Age.SENIOR]).optional(),
+    animalSize: z
+      .enum([
+        AnimalSize.SMALL,
+        AnimalSize.MEDIUM,
+        AnimalSize.LARGE,
+        AnimalSize.XLARGE,
+      ])
+      .optional(),
+    energyLevel: z
+      .enum([EnergyLevel.LOW, EnergyLevel.MEDIUM, EnergyLevel.HIGH])
+      .optional(),
+    independenceLevel: z
+      .enum([
+        IndependenceLevel.LOW,
+        IndependenceLevel.MEDIUM,
+        IndependenceLevel.HIGH,
+      ])
+      .optional(),
+    environment: z
+      .enum([Environment.INDOOR, Environment.OUTDOOR, Environment.BOTH])
+      .optional(),
   })
 
   const {
-    city_id,
+    cityId,
     age,
     animalSize,
     energyLevel,
@@ -51,7 +51,7 @@ export async function SearchPetsFilter(
   const searchPetsFilterUseCase = MakeSearchPetsFilterUseCase()
 
   const { pets } = await searchPetsFilterUseCase.execute({
-    city_id,
+    city_id: cityId,
     age,
     animalSize,
     energyLevel,
